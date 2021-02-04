@@ -8,16 +8,28 @@ const withPreact = require('next-plugin-preact')
 const withPlugins = require('next-compose-plugins')
 const withStyles = require('@webdeb/next-styles')
 
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const oneClassName = require('1-classname')
 
 module.exports = withPlugins(
     [
         [withPreact],
         [withAnalyze],
-        [withStyles, {
-            sass: true,
-            modules: true
-        }],
+        [
+            withStyles,
+            {
+                sass: true,
+                modules: true,
+                cssLoaderOptions: {
+                    getLocalIdent:
+                        process.env.NODE_ENV === 'production'
+                            ? ({ resourcePath }, _, className) =>
+                                  /\.module\.sass$/.test(resourcePath)
+                                      ? oneClassName(resourcePath + className)
+                                      : localName
+                            : undefined
+                }
+            }
+        ],
         [
             withOffline,
             {
@@ -71,18 +83,9 @@ module.exports = withPlugins(
                 '@components': join(__dirname, 'src/components'),
                 '@styles': join(__dirname, 'src/styles'),
                 '@services': join(__dirname, 'src/services'),
-                '@models': join(__dirname, 'src/models')
+                '@models': join(__dirname, 'src/models'),
+                '@tailwind': join(__dirname, 'src/services/tailwind/index.ts')
             }
-
-            if (!options.dev)
-                config.optimization = {
-                    ...config.optimization,
-                    usedExports: true,
-                    minimizer: [
-                        ...config.optimization.minimizer,
-                        new OptimizeCSSAssetsPlugin()
-                    ]
-                }
 
             return config
         }
