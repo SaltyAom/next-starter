@@ -6,30 +6,14 @@ const withAnalyze = require('@next/bundle-analyzer')({
 })
 const withPreact = require('next-plugin-preact')
 const withPlugins = require('next-compose-plugins')
-const withStyles = require('@webdeb/next-styles')
 
-const oneClassName = require('1-classname')
+const withStyles = require('./tools/withStyles')
 
 module.exports = withPlugins(
     [
         [withPreact],
         [withAnalyze],
-        [
-            withStyles,
-            {
-                sass: true,
-                modules: true,
-                cssLoaderOptions: {
-                    getLocalIdent:
-                        process.env.NODE_ENV === 'production'
-                            ? ({ resourcePath }, _, className) =>
-                                  /\.module\.sass$/.test(resourcePath)
-                                      ? oneClassName(resourcePath + className)
-                                      : localName
-                            : undefined
-                }
-            }
-        ],
+        [withStyles],
         [
             withOffline,
             {
