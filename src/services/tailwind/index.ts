@@ -8,8 +8,6 @@ const tw = (classNames: string | TemplateStringsArray) => {
         : classNames
     ).trim()
 
-    if (!isProduction) return names
-
     return names
         .split(' ')
         .map((className) => styles[className])
