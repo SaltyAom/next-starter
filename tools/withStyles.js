@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-unused-vars */
 const oneClassName = require('1-classname')
 
 module.exports = (nextConfig = {}) => ({
@@ -14,10 +17,11 @@ module.exports = (nextConfig = {}) => ({
                     modules: {
                         ...use.options.modules,
                         mode: 'local',
+                        localIdentName: '[path][name]__[local]',
                         getLocalIdent: ({ resourcePath }, _, className) =>
                             process.env.NODE_ENV === 'production'
                                 ? oneClassName(resourcePath + className)
-                                : `${resourcePath}_${className}`
+                                : `${className}_${oneClassName(resourcePath)}`
                     }
                 }
         }
