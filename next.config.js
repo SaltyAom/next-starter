@@ -8,6 +8,7 @@ const withPreact = require('next-plugin-preact')
 const withPlugins = require('next-compose-plugins')
 
 const withStyles = require('./tools/withStyles')
+const { useEsbuildLoader } = require('./tools/useEsbuild')
 
 module.exports = withPlugins(
     [
@@ -59,7 +60,9 @@ module.exports = withPlugins(
             path: '/_next/image',
             loader: 'default'
         },
-        webpack(config, options) {
+        webpack(config) {
+            useEsbuildLoader(config)
+
             config.resolve.alias = {
                 ...config.resolve.alias,
                 '@pages': join(__dirname, 'src/pages'),

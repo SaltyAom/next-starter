@@ -1,9 +1,11 @@
-# SaltyAom's Nextjs Starter
-Starter template for Next.js for production:
+# SaltyAom's Next Starter
+Starter template for blazing fast Next.js app:
 
 ## Featuring
-- Starting at 26KB 
-    - With Preact configuration reduce initial size to just 26KB.
+- EsBuild
+    - Configured with esbuild loader, with faster build time.
+- Starting at 28KB 
+    - With Preact configuration reduce initial size to just 28KB.
 - TypeScript
     - Type-safe code base for faster and easier maintainance.
 - Tailwind
