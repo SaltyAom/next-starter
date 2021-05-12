@@ -1,11 +1,8 @@
-import { isProduction } from '@services/validation'
-
 import styles from './tailwind.module.sass'
 
 const tw = (classNames: string | TemplateStringsArray) => {
-    let names = (typeof classNames === 'object'
-        ? classNames[0]
-        : classNames
+    let names = (
+        typeof classNames === 'object' ? classNames[0] : classNames
     ).trim()
 
     return names
@@ -13,5 +10,7 @@ const tw = (classNames: string | TemplateStringsArray) => {
         .map((className) => styles[className])
         .join(' ')
 }
+
+export const combine = (...classNames: string[]) => classNames.join(' ')
 
 export default tw

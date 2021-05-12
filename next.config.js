@@ -71,7 +71,11 @@ module.exports = withPlugins(
                 '@styles': join(__dirname, 'src/styles'),
                 '@services': join(__dirname, 'src/services'),
                 '@models': join(__dirname, 'src/models'),
-                '@tailwind': join(__dirname, 'src/services/tailwind/index.ts')
+                '@tailwind': join(__dirname, 'src/services/tailwind/index.ts'),
+                '@stores': join(__dirname, 'src/stores'),
+                '@atoms': join(__dirname, 'src/components/atoms'),
+                '@molecules': join(__dirname, 'src/components/molecules'),
+                '@organisms': join(__dirname, 'src/components/organisms')
             }
 
             return config

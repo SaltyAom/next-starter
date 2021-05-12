@@ -34,7 +34,8 @@ module.exports = {
         'jsx-a11y/anchor-is-valid': 0,
         'import/extensions': 0,
         'consistent-return': 0,
-        'prefer-template': 0
+        'prefer-template': 0,
+        'arrow-body-style': 0
     },
     ignorePatterns: [
         '__tests__',

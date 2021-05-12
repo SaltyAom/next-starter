@@ -13,6 +13,10 @@
                     "@services": "./src/services",
                     "@models": "./src/models",
                     "@tailwind": "./src/services/tailwind/index.ts",
+                    "@stores": "./src/stores",
+                    "@atoms": "./src/stores",
+                    "@molecules": "./src/molecules",
+                    "@organisms": "./src/organisms",
                     "~": "./"
                 }
             }
