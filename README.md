@@ -31,7 +31,11 @@ List of path aliased:
 - `@styles` - src/styles
 - `@services` - src/services
 - `@models` - src/models
+- `@stores` - src/stores
 - `@tailwind` - src/services/tailwind/index.ts
+- `@atoms` - src/components/atoms
+- `@molecules` - src/components/molecules
+- `@organisms` - src/components/organisms
 
 ## Test Environment
 Test suite is set up with Jest and React Testing Library with configured for using `next/dynamic`
