@@ -14,9 +14,10 @@
                     "@models": "./src/models",
                     "@tailwind": "./src/services/tailwind/index.ts",
                     "@stores": "./src/stores",
-                    "@atoms": "./src/stores",
-                    "@molecules": "./src/molecules",
-                    "@organisms": "./src/organisms",
+                    "@atoms": "./src/components/atoms",
+                    "@molecules": "./src/components/molecules",
+                    "@organisms": "./src/components/organisms",
+                    "@public": "./public",
                     "~": "./"
                 }
             }
