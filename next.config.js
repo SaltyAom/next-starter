@@ -6,15 +6,11 @@ const withAnalyze = require('@next/bundle-analyzer')({
 })
 const withPlugins = require('next-compose-plugins')
 
-const withStyles = require('./tools/withStyles')
-const withEsbuild = require('./tools/withEsbuild')
 const withPreact = require('./tools/withPreact')
 const offlineConfig = require('./tools/withOffline')
 
 module.exports = withPlugins(
     [
-        [withStyles],
-        [withEsbuild],
         [withPreact],
         [withOffline, offlineConfig],
         [withAnalyze]
@@ -38,7 +34,7 @@ module.exports = withPlugins(
             path: '/_next/image',
             loader: 'default'
         },
-        webpack(config, { webpack }) {
+        webpack(config) {
             config.resolve.alias = {
                 ...config.resolve.alias,
                 '@pages': join(__dirname, 'src/pages'),
@@ -47,7 +43,6 @@ module.exports = withPlugins(
                 '@styles': join(__dirname, 'src/styles'),
                 '@services': join(__dirname, 'src/services'),
                 '@models': join(__dirname, 'src/models'),
-                '@tailwind': join(__dirname, 'src/services/tailwind/index.ts'),
                 '@stores': join(__dirname, 'src/stores'),
                 '@atoms': join(__dirname, 'src/components/atoms'),
                 '@molecules': join(__dirname, 'src/components/molecules'),

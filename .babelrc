@@ -12,7 +12,6 @@
                     "@styles": "./src/styles",
                     "@services": "./src/services",
                     "@models": "./src/models",
-                    "@tailwind": "./src/services/tailwind/index.ts",
                     "@stores": "./src/stores",
                     "@atoms": "./src/components/atoms",
                     "@molecules": "./src/components/molecules",

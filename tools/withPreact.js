@@ -4,7 +4,9 @@
 /* eslint-disable no-unused-vars */
 module.exports = (nextConfig = {}) => ({
     ...nextConfig,
-    webpack(config, { dev, isServer }) {
+    webpack(config, { dev }) {
+        if(dev) return config
+
         const splitChunks =
             config.optimization && config.optimization.splitChunks
 
@@ -32,18 +34,6 @@ module.exports = (nextConfig = {}) => ({
             react: 'preact/compat',
             'react-dom': 'preact/compat',
             'react-render-to-string': 'preact-render-to-string'
-        }
-
-        // inject Preact DevTools
-        if (dev && !isServer) {
-            const entry = config.entry
-            config.entry = () =>
-                entry().then((entries) => {
-                    entries['main.js'] = ['preact/debug'].concat(
-                        entries['main.js'] || []
-                    )
-                    return entries
-                })
         }
 
         return config

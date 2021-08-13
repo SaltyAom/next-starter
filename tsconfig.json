@@ -56,7 +56,6 @@
             "@services/*": ["src/services/*"],
             "@models": ["src/models/*"],
             "@models/*": ["src/models/*"],
-            "@tailwind": ["src/services/tailwind/index.ts"],
             "@stores": ["src/stores/index.ts"],
             "@stores/*": ["src/stores/*"],
             "@atoms": ["src/components/atoms/index.ts"],
