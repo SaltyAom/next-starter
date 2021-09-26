@@ -17,6 +17,7 @@
                     "@molecules": "./src/components/molecules",
                     "@organisms": "./src/components/organisms",
                     "@public": "./public",
+                    "@tailwind": "./src/services/tailwind",
                     "~": "./"
                 }
             }
