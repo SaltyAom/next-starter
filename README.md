@@ -4,7 +4,7 @@ Starter template for blazing fast Next.js app:
 ## Featuring
 - EsBuild
     - Configured with esbuild loader, with faster build time.
-- Starting at 28KB 
+- Starting at 40KB 
     - With Preact configuration reduce initial size to just 28KB.
 - TypeScript
     - Type-safe code base for faster and easier maintainance.
@@ -42,4 +42,4 @@ Test suite is set up with Jest and React Testing Library with configured for usi
 
 The structure for test is illustrated as the following:
 * __tests__ - Contains test file.
-* __mocks__ - Mockup file like | (css|styl|.scss|.less) is set. (Can be changed at `jest.config.js`)
+* __mocks__ - Mockup file like | `css`, `sass` and `less` is set. (Can be changed at `jest.config.js`)
