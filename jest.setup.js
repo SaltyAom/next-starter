@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom'
+require('@testing-library/jest-dom')
 
 /* Mock jest dynamic */
 jest.mock('next/dynamic', () => () => {
