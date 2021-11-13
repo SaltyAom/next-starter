@@ -1,0 +1,66 @@
+$icon: 24px
+$size: 74px
+$nav: 64px
+$profile: 48px
+
+.aside
+    height: $size
+    box-shadow: 4px 0 16px rgba(0,0,0,.125)
+
+    @screen md
+        width: $size
+        height: 100vh
+        box-shadow: 0 4px 16px rgba(0,0,0,.0875)
+        will-change: width
+
+.item
+    white-space: nowrap
+
+    @screen md
+        width: 100%
+        height: $size
+
+.main
+    width: $size * 1.1
+    height: $size * 1.1
+    background: linear-gradient(135deg, #00B4DB, #0083B0)
+    transform: translateY(-8px)
+    box-shadow: 2px 0 8px rgba(0,0,0,.0375)
+
+    @screen md
+        width: 100%
+        height: $size
+        transform: unset
+        box-shadow: unset
+
+.icon
+    @screen md
+        @apply p-6
+        min-width: $size
+        min-height: $size
+
+.nav
+    height: $nav
+    box-shadow: 0 2px 8px rgba(0,0,0,.125)
+
+.sub-menu
+    top: $nav
+    height: 0
+    // height: calc(100vh - $nav)
+    box-shadow: 4px 0 8px rgba(0,0,0,.2)
+    will-change: width, height
+
+    @screen md
+        top: 0
+        left: $size
+        height: 100vh
+        width: 0
+
+.profile
+    min-width: $profile
+    min-height: $profile
+    max-width: $profile
+    max-height: $profile
+
+.aside-placeholder
+    width: $size

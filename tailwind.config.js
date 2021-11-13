@@ -6,7 +6,13 @@ module.exports = {
     },
     darkMode: 'class',
     theme: {
-        extend: {}
+        extend: {
+            colors: {
+                primary: {
+                    DEFAULT: '#26467B'
+                }
+            }
+        }
     },
     variants: {
         extend: {}
