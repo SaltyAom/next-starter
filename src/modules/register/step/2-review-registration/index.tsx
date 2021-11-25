@@ -13,7 +13,10 @@ import { useRegister } from '@stores'
 
 import tw from '@tailwind'
 
-import subjectDetail, { subjectToDate } from '../0-subject-selection/data'
+import subjectDetail, {
+    subjectToDate,
+    normalSubjects
+} from '../0-subject-selection/data'
 
 const ReviewRegistration = () => {
     const [registration, updateRegistration] = useRegister()
@@ -22,7 +25,9 @@ const ReviewRegistration = () => {
     const selectedDates = [
         ...new Set(
             subjects
-                .map((v) => v.split(' ความ')[0])
+                .map((v) =>
+                    v.includes('ความ') ? v.split(' ความ')[0] : v.slice(0, 2)
+                )
                 .map((v) => subjectToDate[v as keyof typeof subjectToDate])
         )
     ].sort()
@@ -62,12 +67,9 @@ const ReviewRegistration = () => {
                         className={tw`flex flex-col md:table-row-group gap-8`}
                     >
                         {selectedDates.map((date) => {
-                            const dateSubjects =
-                                subjectDetail
-                                    .filter(
-                                        ({ day: [, subjectDate] }) =>
-                                            subjectDate === date
-                                    )
+                            const dateSubjects = [
+                                ...(subjectDetail
+                                    .filter((v) => v.day[1] === date)
                                     .flatMap((v) => {
                                         const code = v.subjects.flatMap((x) =>
                                             x.map((y) => y.join(' '))
@@ -77,7 +79,20 @@ const ReviewRegistration = () => {
                                             subjects.includes(c)
                                         )
                                     })
-                                    .filter((v) => v) || []
+                                    .filter((v) => v) || []),
+                                ...(normalSubjects
+                                    .filter((v) => v.day[1] === date)
+                                    .flatMap((v) => {
+                                        const code = v.subjects.flatMap((x) =>
+                                            x.map((y) => y.join(' '))
+                                        )
+
+                                        return code.filter((c) =>
+                                            subjects.includes(c)
+                                        )
+                                    })
+                                    .filter((v) => v) || [])
+                            ]
 
                             return (
                                 <TableRow key={date}>
@@ -93,7 +108,9 @@ const ReviewRegistration = () => {
                                             {date}
                                         </Typography>
                                         {dateSubjects.map((s) => (
-                                            <Typography variant="h6">{s}</Typography>
+                                            <Typography variant="h6">
+                                                {s}
+                                            </Typography>
                                         ))}
                                     </TableCell>
                                     <TableCell

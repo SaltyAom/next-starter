@@ -43,7 +43,6 @@ const Payment = () => {
                 variant="contained"
                 disableElevation
                 className={tw`px-6 py-3 my-6`}
-                onClick={next}
             >
                 <Typography className={tw`flex items-center gap-3`}>
                     <Printer width={21} /> Print ใบชำระเงิน

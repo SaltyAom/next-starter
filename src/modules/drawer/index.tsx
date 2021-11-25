@@ -10,7 +10,7 @@ import {
     Layout,
     Tool,
     User,
-    XSquare
+    Book
 } from 'react-feather'
 
 import tw, { combine } from '@tailwind'
@@ -22,7 +22,7 @@ import type { DrawerComponent } from './types'
 const items = [
     ['/', 'หน้าแรก', <Layout />],
     ['/register', 'สมัครสอบ', <Edit3 />],
-    ['/history', 'ประวัติการสมัคร', <XSquare />],
+    ['/history', 'ประวัติการสมัคร', <Book />],
     ['/edit', 'แก้ไขการสมัคร', <Tool />],
     ['/map', 'ที่นั่งสอบ/สถานที่สอบ', <Info />, false],
     ['/result', 'ผลการสอบ', <FileText />, false],

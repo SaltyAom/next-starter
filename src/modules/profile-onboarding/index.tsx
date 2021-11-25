@@ -14,9 +14,7 @@ const Landing = () => {
 
     const imageRef = useRef<FileList>(null)
 
-    const onSubmit: FormEventHandler = (event) => {
-        event.preventDefault()
-
+    const handleUpload = () => {
         updateProfile({
             ...profile,
             image: "https://pbs.twimg.com/profile_images/1305491092918292485/q6p8QmUl_400x400.jpg"
@@ -24,9 +22,8 @@ const Landing = () => {
     }
 
     return (
-        <form
+        <section
             className={tw`flex flex-col justify-center items-center w-full max-w-4xl min-h-app mx-auto px-4 py-12 gap-12`}
-            onSubmit={onSubmit}
         >
             <Typography variant="h5">อัพโหลดรูปถ่าย</Typography>
 
@@ -37,8 +34,9 @@ const Landing = () => {
                     <ImagePicker imageRef={imageRef} />
 
                     <button
-                        type="submit"
+                        type="button"
                         className={tw`mt-4 px-6 py-3 text-white font-semibold bg-black rounded-lg`}
+                        onClick={handleUpload}
                     >
                         บันทึกรูปภาพ
                     </button>
@@ -57,7 +55,7 @@ const Landing = () => {
                     <Typography className={tw`mb-2 text-gray-500 dash`}>ประเภทของไฟล์เป็น jpg หรือ png เท่านั้น</Typography>
                  </section>
             </main>
-        </form>
+        </section>
     )
 }
 

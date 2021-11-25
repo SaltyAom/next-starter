@@ -22,7 +22,8 @@ import { useRegister } from '@stores'
 import subjects, {
     schools,
     locations as schoolsDetail,
-    subjectToDate
+    subjectToDate,
+    normalSubjects
 } from './data'
 
 import { SearchLocation, SpecialNeed } from './components'
@@ -38,7 +39,9 @@ const SubjectSelection = () => {
     const selectedDates = [
         ...new Set(
             selection
-                .map((v) => v.split(' ความ')[0])
+                .map((v) =>
+                    v.includes('ความ') ? v.split(' ความ')[0] : v.slice(0, 2)
+                )
                 .map((v) => subjectToDate[v as keyof typeof subjectToDate])
         )
     ].sort()
@@ -104,6 +107,7 @@ const SubjectSelection = () => {
                     (เลือก {selection.length} วิชา)
                 </Typography>
             </Typography>
+
             <TableContainer className={tw`w-full max-table border rounded`}>
                 <Table className={tw`w-full`} aria-label="Subject Selection">
                     <TableHead>
@@ -115,6 +119,96 @@ const SubjectSelection = () => {
                     </TableHead>
                     <TableBody>
                         {subjects.map((subject) => (
+                            <TableRow
+                                key={subject.day[1]}
+                                sx={{
+                                    '&:last-child td, &:last-child th': {
+                                        border: 0
+                                    }
+                                }}
+                            >
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    className={tw`min-w-[120px]`}
+                                >
+                                    <Typography
+                                        variant="caption"
+                                        className={tw`text-gray-600`}
+                                    >
+                                        {subject.day[0]}
+                                    </Typography>
+                                    <Typography variant="subtitle1">
+                                        {subject.day[1]}
+                                    </Typography>
+                                </TableCell>
+                                {subject.subjects.map((part, index) => (
+                                    // eslint-disable-next-line react/no-array-index-key
+                                    <TableCell key={index}>
+                                        <FormControl component="fieldset">
+                                            <RadioGroup
+                                                aria-label="subject"
+                                                name={`${subject.day}-${index}`}
+                                                className={tw`flex flex-col justify-start gap-4`}
+                                            >
+                                                {part.map(
+                                                    ([type, subjectName]) => (
+                                                        <FormControlLabel
+                                                            key={subjectName}
+                                                            value={
+                                                                subjectName as string
+                                                            }
+                                                            checked={selection.includes(
+                                                                `${type} ${subjectName}`
+                                                            )}
+                                                            control={
+                                                                <Radio
+                                                                    onClick={handleSelect(
+                                                                        `${type} ${subjectName}`
+                                                                    )}
+                                                                />
+                                                            }
+                                                            label={
+                                                                <>
+                                                                    <Typography
+                                                                        variant="caption"
+                                                                        className={tw`text-gray-600`}
+                                                                    >
+                                                                        {type}
+                                                                    </Typography>
+                                                                    <Typography variant="body1">
+                                                                        {
+                                                                            subjectName
+                                                                        }
+                                                                    </Typography>
+                                                                </>
+                                                            }
+                                                        />
+                                                    )
+                                                )}
+                                            </RadioGroup>
+                                        </FormControl>
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+            <TableContainer className={tw`w-full max-table border rounded`}>
+                <Table className={tw`w-full`} aria-label="Subject Selection">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>วันที่</TableCell>
+                            <TableCell>08:30 - 10:00</TableCell>
+                            <TableCell>11:00 - 12:30</TableCell>
+                            <TableCell>13:00 - 16:00</TableCell>
+                            <TableCell>15:30 - 17:00</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {normalSubjects.map((subject) => (
                             <TableRow
                                 key={subject.day[1]}
                                 sx={{
@@ -229,15 +323,15 @@ const SubjectSelection = () => {
                             const index = schools.indexOf(currentLocation)
                             const province = schoolsDetail[index]?.[3] || ''
 
-                            const mapOption = (i: number) => 
+                            const mapOption = (i: number) =>
                                 createOption(
                                     schoolsDetail[
                                         schools.indexOf(current[i])
                                     ]?.[0]
                                 )
 
-                            const availableSubject =
-                                subjects
+                            const availableSubject = [
+                                ...(subjects
                                     .filter((v) => v.day[1] === date)
                                     .flatMap((v) => {
                                         const code = v.subjects.flatMap((x) =>
@@ -248,12 +342,29 @@ const SubjectSelection = () => {
                                             selection.includes(c)
                                         )
                                     })
-                                    .filter((v) => v) || []
+                                    .filter((v) => v) || []),
+                                ...(normalSubjects
+                                    .filter((v) => v.day[1] === date)
+                                    .flatMap((v) => {
+                                        const code = v.subjects.flatMap((x) =>
+                                            x.map((y) => y.join(' '))
+                                        )
+
+                                        return code.filter((c) =>
+                                            selection.includes(c)
+                                        )
+                                    })
+                                    .filter((v) => v) || [])
+                            ]
 
                             return (
                                 <TableRow key={date}>
                                     <TableCell component="th" scope="row">
-                                        <Typography className={tw`text-gray-400`}>{date}</Typography>
+                                        <Typography
+                                            className={tw`text-gray-400`}
+                                        >
+                                            {date}
+                                        </Typography>
                                         {availableSubject.map((subject) => (
                                             <Typography
                                                 variant="h6"
