@@ -28,10 +28,10 @@ module.exports = (config, options) => {
                         } = context
 
                         return !options.dev
-                            ? oneClassName(
+                            ? "salt_" + oneClassName(
                                   resourcePath + className + localIdentName
                               )
-                            : `${className}_${oneClassName(resourcePath)}`
+                            : `salt_${className}_${oneClassName(resourcePath)}`
                     }
                 }
             }

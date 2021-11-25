@@ -34,7 +34,7 @@ module.exports = withPlugins(
             loader: 'default'
         },
         webpack(config, options) {
-            usePreact(config, options)
+            // usePreact(config, options)
             useStyles(config, options)
 
             config.resolve.alias = {
@@ -50,7 +50,8 @@ module.exports = withPlugins(
                 '@molecules': join(__dirname, 'src/components/molecules'),
                 '@organisms': join(__dirname, 'src/components/organisms'),
                 '@public': join(__dirname, 'public'),
-                '@tailwind': join(__dirname, 'src/services/tailwind')
+                '@tailwind': join(__dirname, 'src/services/tailwind'),
+                '@modules': join(__dirname, 'src/modules')
             }
 
             return config

@@ -1,2 +1,19 @@
 @tailwind components
 @tailwind utilities
+
+.label
+    @apply text-xl font-medium w-full
+
+.error
+    @apply text-base font-medium text-red-500
+
+.min-h-app
+    min-height: calc(100vh - 64px)
+
+.max-table
+    max-width: calc(100vw - 2rem)
+
+.dash
+    &::before
+        @apply inline-block mr-2
+        content: "—"

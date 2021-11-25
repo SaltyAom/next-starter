@@ -2,7 +2,7 @@ module.exports = {
     mode: 'jit',
     purge: {
         preserveHtmlElements: false,
-	content: ['src/**/*.{jsx,tsx,js,ts}']
+        content: ['src/**/*.[j|t]s[x]']
     },
     darkMode: 'class',
     theme: {
@@ -11,6 +11,7 @@ module.exports = {
     variants: {
         extend: {}
     },
+    important: true,
     plugins: [
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/forms')

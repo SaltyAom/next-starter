@@ -35,7 +35,9 @@ module.exports = {
         'import/extensions': 0,
         'consistent-return': 0,
         'prefer-template': 0,
-        'arrow-body-style': 0
+        'arrow-body-style': 0,
+        'react/require-default-props': 0,
+        'no-unused-vars': 1
     },
     ignorePatterns: [
         '__tests__',

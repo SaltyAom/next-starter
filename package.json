@@ -14,10 +14,18 @@
 	},
 	"dependencies": {
 		"1-classname": "^1.2.0",
+		"@emotion/react": "^11.6.0",
+		"@emotion/styled": "^11.6.0",
+		"@mui/icons-material": "^5.2.0",
+		"@mui/material": "^5.2.0",
+		"jotai": "^1.4.5",
 		"next": "^12.0.0",
 		"preact": "^10.5.15",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
+		"react-easy-crop": "^3.5.3",
+		"react-feather": "^2.0.9",
+		"react-hook-form": "^7.20.2",
 		"tailwindcss": "^2.2.17"
 	},
 	"devDependencies": {
