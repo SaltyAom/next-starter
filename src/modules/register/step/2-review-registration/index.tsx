@@ -121,9 +121,9 @@ const ReviewRegistration = () => {
                                                 location: string,
                                                 index: number
                                             ) => (
-                                                // eslint-disable-next-line react/no-array-index-key
                                                 <article
-                                                    key={location || index}
+                                                    // eslint-disable-next-line react/no-array-index-key
+                                                    key={index}
                                                     className={tw`flex flex-col my-4`}
                                                 >
                                                     <Typography

@@ -9,7 +9,7 @@ import tw from '@tailwind'
 const Payment = () => {
     const [registration, updateRegistration] = useRegister()
 
-    const { subjects } = registration
+    const { subjects, totalConfirmedSubjects } = registration
 
     const next = () => {
         updateRegistration({
@@ -17,6 +17,8 @@ const Payment = () => {
             step: 4
         })
     }
+
+    const left = subjects.length - totalConfirmedSubjects
 
     return (
         <main className={tw`flex flex-col items-start gap-1 w-full max-w-4xl`}>
@@ -32,12 +34,31 @@ const Payment = () => {
                 2565
             </Typography>
 
-            <Typography variant="body1" className={tw`mt-8 text-gray-700`}>
-                ท่านต้องชำระเงินค่าสมัครทั้งหมด {subjects.length} วิชา
-            </Typography>
-            <Typography variant="h6" className={tw`my-2`}>
-                รวมเป็นค่าสมัครสอบ {subjects.length * 140} บาท
-            </Typography>
+            {!!totalConfirmedSubjects && (
+                <Typography className={tw`mt-8 text-gray-700`}>
+                    เนื่องจากท่านได้เคยชำระเงินมาแล้ว {subjects.length} วิชา
+                </Typography>
+            )}
+            {left > 0 && (
+                <>
+                    <Typography variant="body1" className={tw`mt-8 text-gray-700`}>
+                        ท่านต้องชำระเงินค่าสมัครทั้งหมด{left !== subjects.length && "เพิ่มอีก"} {left} วิชา
+                    </Typography>
+                    <Typography variant="h6" className={tw`my-2`}>
+                        รวมเป็นค่าสมัครสอบ {left * 140} บาท
+                    </Typography>
+                </>
+            )}
+            {left < 0 && (
+                <>
+                    <Typography variant="body1" className={tw`mt-8 text-gray-700`}>
+                        และท่านยกเลิกการสอบไป {Math.abs(left)} วิชา
+                    </Typography>
+                    <Typography variant="h6" className={tw`my-2`}>
+                        ท่านสามารถขอเงินคืนได้ {left * -140} บาท
+                    </Typography>
+                </>
+            )}
 
             <Button
                 variant="contained"

@@ -61,7 +61,7 @@ const OtpLayout = ({
 
         updateCountdown({
             type: 'update',
-            value: 300
+            value: 15 * 60
         })
     }
 

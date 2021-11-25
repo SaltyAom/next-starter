@@ -1,5 +1,7 @@
 import { useState } from 'react'
+
 import Link from 'next/link'
+import Head from 'next/head'
 
 import { useForm } from 'react-hook-form'
 
@@ -54,44 +56,49 @@ const SignIn = () => {
     }
 
     return (
-        <FormLayout title="เข้าสู่ระบบเพื่อดำเนินการต่อ">
-            <form
-                className="flex flex-col w-full pt-6 pb-2 gap-4"
-                onSubmit={handleSubmit(process)}
-            >
-                {Object.keys(form).map((input) => (
-                    <Input
-                        key={input}
-                        placeholder={input}
-                        {...form[input]}
-                        register={register(input)}
-                    />
-                ))}
-                {error && (
-                    <a className={`${style.content} text-red-400 font-medium`}>
-                        {error}
-                    </a>
-                )}
+        <>
+            <Head>
+                <title>เข้าสู่ระบบ TCAS 65</title>
+            </Head>
+            <FormLayout title="เข้าสู่ระบบเพื่อดำเนินการต่อ">
+                <form
+                    className="flex flex-col w-full pt-6 pb-2 gap-4"
+                    onSubmit={handleSubmit(process)}
+                >
+                    {Object.keys(form).map((input) => (
+                        <Input
+                            key={input}
+                            placeholder={input}
+                            {...form[input]}
+                            register={register(input)}
+                        />
+                    ))}
+                    {error && (
+                        <a className={`${style.content} text-red-400 font-medium`}>
+                            {error}
+                        </a>
+                    )}
 
-                <a className={`${style.link} font-normal`}>ลืมรหัสผ่าน</a>
-                <Button primary onClick={handleSubmit(process)}>
-                    เข้าสู่ระบบ
-                </Button>
-                <p className={`${style.content} mt-2`}>
-                    เข้าสู่ระบบไม่ได้?{' '}
-                    <Link href="/">
-                        <a className={style.link}>สร้างบัญชี</a>
-                    </Link>
-                </p>
-            </form>
+                    <a className={`${style.link} font-normal`}>ลืมรหัสผ่าน</a>
+                    <Button primary onClick={handleSubmit(process)}>
+                        เข้าสู่ระบบ
+                    </Button>
+                    <p className={`${style.content} mt-2`}>
+                        เข้าสู่ระบบไม่ได้?{' '}
+                        <Link href="/">
+                            <a className={style.link}>สร้างบัญชี</a>
+                        </Link>
+                    </p>
+                </form>
 
-            {/* <div className="w-full h-[1px] bg-gray-300 my-4" /> */}
+                {/* <div className="w-full h-[1px] bg-gray-300 my-4" /> */}
 
-            {/* <footer className="flex flex-col w-full gap-3">
-                <Button icon={<Google />}>Continue with Google</Button>
-                <Button icon={<Facebook />}>Continue with Facebook</Button>
-            </footer> */}
-        </FormLayout>
+                {/* <footer className="flex flex-col w-full gap-3">
+                    <Button icon={<Google />}>Continue with Google</Button>
+                    <Button icon={<Facebook />}>Continue with Facebook</Button>
+                </footer> */}
+            </FormLayout>
+        </>
     )
 }
 

@@ -52,6 +52,18 @@ const SubjectSelection = () => {
         if (name.includes('PAT 7.'))
             previous = previous.filter((subject) => !subject.includes('PAT 7.'))
 
+        if (name.startsWith('39') && previous.find((v) => v.startsWith('89')))
+            previous = previous.filter((subject) => !subject.startsWith('89'))
+
+        if (name.startsWith('89') && previous.find((v) => v.startsWith('39')))
+            previous = previous.filter((subject) => !subject.startsWith('39'))
+
+        if (name.startsWith('49') && previous.find((v) => v.startsWith('99')))
+            previous = previous.filter((subject) => !subject.startsWith('99'))
+
+        if (name.startsWith('99') && previous.find((v) => v.startsWith('49')))
+            previous = previous.filter((subject) => !subject.startsWith('49'))
+
         updateRegistration({
             ...registration,
             subjects: selection.includes(name)
@@ -102,10 +114,7 @@ const SubjectSelection = () => {
                 variant="h6"
                 className={tw`flex items-center gap-2 mb-2`}
             >
-                เลือกวิชา{' '}
-                <Typography className={tw`text-gray-400`}>
-                    (เลือก {selection.length} วิชา)
-                </Typography>
+                เลือกวิชาสอบ GAT/PAT{' '}
             </Typography>
 
             <TableContainer className={tw`w-full max-table border rounded`}>
@@ -196,15 +205,22 @@ const SubjectSelection = () => {
                 </Table>
             </TableContainer>
 
+            <Typography
+                variant="h6"
+                className={tw`flex items-center gap-2 mt-6 mb-2`}
+            >
+                เลือกวิชาสอบสามัญ
+            </Typography>
+
             <TableContainer className={tw`w-full max-table border rounded`}>
                 <Table className={tw`w-full`} aria-label="Subject Selection">
                     <TableHead>
                         <TableRow>
                             <TableCell>วันที่</TableCell>
-                            <TableCell>08:30 - 10:00</TableCell>
-                            <TableCell>11:00 - 12:30</TableCell>
-                            <TableCell>13:00 - 16:00</TableCell>
-                            <TableCell>15:30 - 17:00</TableCell>
+                            <TableCell className={tw`min-w-[160px]`}>08:30 - 10:00</TableCell>
+                            <TableCell className={tw`min-w-[160px]`}>11:00 - 12:30</TableCell>
+                            <TableCell className={tw`min-w-[160px]`}>13:00 - 16:00</TableCell>
+                            <TableCell className={tw`min-w-[160px]`}>15:30 - 17:00</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -359,7 +375,7 @@ const SubjectSelection = () => {
 
                             return (
                                 <TableRow key={date}>
-                                    <TableCell component="th" scope="row">
+                                    <TableCell component="th" scope="row" className={tw`flex flex-col gap-1 md:table-cell`}>
                                         <Typography
                                             className={tw`text-gray-400`}
                                         >
