@@ -1,9 +1,6 @@
 module.exports = {
     mode: 'jit',
-    purge: {
-        preserveHtmlElements: false,
-	content: ['src/**/*.{jsx,tsx,js,ts}']
-    },
+    content: ['src/**/*.{jsx,tsx,js,ts}'],
     darkMode: 'class',
     theme: {
         extend: {}

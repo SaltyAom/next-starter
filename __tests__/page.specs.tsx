@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import Landing from '@pages/index'
+import Landing from '@app/page'
 
 import { render } from '@testing-library/react'
 

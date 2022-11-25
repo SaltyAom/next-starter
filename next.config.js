@@ -1,18 +1,18 @@
 const { join } = require('path')
 
-const withOffline = require('next-offline')
+const withPwa = require('next-pwa')
 const withAnalyze = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true'
 })
-const withPrefresh = require('@prefresh/next')
-const withPlugins = require('next-compose-plugins')
 
-const useStyles = require('./tools/useStyles')
-const usePreact = require('./tools/usePreact')
-const offlineConfig = require('./tools/withOffline')
+const withPlugins = require('next-compose-plugins')
+const pwaConfig = require('./tools/withPwa')
 
 module.exports = withPlugins(
-    [[withOffline, offlineConfig], [withAnalyze], [withPrefresh]],
+    [
+        // [withPwa, pwaConfig]
+        [withAnalyze]
+    ],
     {
         swcMinify: true,
         async rewrites() {
@@ -24,8 +24,7 @@ module.exports = withPlugins(
             ]
         },
         experimental: {
-            modern: true,
-            polyfillsOptimization: true
+            appDir: true
         },
         images: {
             deviceSizes: [640, 750, 828, 1080],
@@ -34,26 +33,26 @@ module.exports = withPlugins(
             loader: 'default'
         },
         webpack(config, options) {
-            usePreact(config, options)
-            useStyles(config, options)
-
             config.resolve.alias = {
                 ...config.resolve.alias,
-                '@pages': join(__dirname, 'src/pages'),
+                '@app': join(__dirname, 'src/app'),
                 '@layouts': join(__dirname, 'src/layouts'),
                 '@components': join(__dirname, 'src/components'),
+                '@shared': join(__dirname, 'src/components/shared'),
+                '@modules': join(__dirname, 'src/components/modules'),
                 '@styles': join(__dirname, 'src/styles'),
                 '@services': join(__dirname, 'src/services'),
                 '@models': join(__dirname, 'src/models'),
                 '@stores': join(__dirname, 'src/stores'),
-                '@atoms': join(__dirname, 'src/components/atoms'),
-                '@molecules': join(__dirname, 'src/components/molecules'),
-                '@organisms': join(__dirname, 'src/components/organisms'),
                 '@public': join(__dirname, 'public'),
-                '@tailwind': join(__dirname, 'src/services/tailwind')
+                '@': __dirname
             }
 
             return config
+        },
+        i18n: {
+            locales: ['en-US'],
+            defaultLocale: 'en-US',
         }
     }
 )

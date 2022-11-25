@@ -1,1 +1,1 @@
-export { isProduction, isServer } from './validation'
+export { isProduction, isServer } from './flags'
