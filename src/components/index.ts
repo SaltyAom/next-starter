@@ -1,1 +1,1 @@
-export { OpenGraph } from './shared'
+export {}
