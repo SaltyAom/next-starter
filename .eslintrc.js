@@ -19,6 +19,7 @@ module.exports = {
     },
     plugins: ['react', '@typescript-eslint'],
     rules: {
+        'react/function-component-definition': 0,
         'import/no-unresolved': 0,
         'import/prefer-default-export': 0,
         'prefer-const': 0,

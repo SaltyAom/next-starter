@@ -1,9 +1,7 @@
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 
 import type { OpenGraphComponent } from './types'
 
-// eslint-disable-next-line react/function-component-definition
 const OpenGraph: OpenGraphComponent = ({
     canonical,
     title,
@@ -17,10 +15,8 @@ const OpenGraph: OpenGraphComponent = ({
         height: 1080
     },
     name = title,
-    twitterDevAccount = '@SaltyAom'
+    twitterDevAccount = '@saltyAom'
 }) => {
-    let { asPath = '/' } = useRouter() ?? { asPath: '/' }
-
     return (
         <Head>
             <title>{title}</title>
@@ -29,7 +25,7 @@ const OpenGraph: OpenGraphComponent = ({
             <meta name="author" content={author} />
             <link rel="icon" href={icon} />
             <link rel="shortcut icon" href={icon} />
-            <link rel="canonical" href={`${canonical}${asPath}`} />
+            <link rel="canonical" href={canonical} />
             <meta
                 name="keyword"
                 content={`${title},${
@@ -49,7 +45,7 @@ const OpenGraph: OpenGraphComponent = ({
             />
             <meta property="og:locale" content="en_US" />
             <meta property="og:type" content="website" />
-            <meta property="og:url" content={`${canonical}${asPath}`} />
+            <meta property="og:url" content={canonical} />
 
             <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={title} />
