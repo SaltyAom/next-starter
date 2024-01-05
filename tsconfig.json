@@ -51,7 +51,7 @@
             "@layouts/*": ["src/layouts/*"],
             "@components": ["src/components/index.ts"],
             "@components/*": ["src/components/*"],
-            "@shared": ["src/components/shared/index.ts"],
+            "@shared": ["src/components/shared"],
             "@shared/*": ["src/components/shared/*"],
             "@modules": ["src/components/modules/index.ts"],
             "@modules/*": ["src/components/modules/*"],
